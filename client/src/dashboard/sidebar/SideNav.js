@@ -1,5 +1,6 @@
 import React from 'react'
 import { Sidebar, } from 'flowbite-react'
+import { Link } from 'react-router-dom'
 
 const SideNav = () => {
   return (
@@ -9,22 +10,18 @@ const SideNav = () => {
     <Sidebar.Items className='bg-gray-200 shadow-md shadow-black/200 fixed h-full left-0 top-0 w-[200px] p-5'>
       <Sidebar.ItemGroup>
         <Sidebar.Item
-          href="#"
         >
-          Dashboard
+          <Link to="/dashboard">Dashboard</Link>
         </Sidebar.Item>
         <Sidebar.Item
-          href="#"
-          //icon={HiViewBoards}
           labelColor="alternative"
         >
-         Approved
+         <Link to="/approved" >Approved</Link>
         </Sidebar.Item>
         <Sidebar.Item
-          href="#"
           //icon={HiInbox}
         >
-          Pending
+          <Link to="/pending" >Pending</Link>
         </Sidebar.Item>
         <Sidebar.Item
           href="#"
