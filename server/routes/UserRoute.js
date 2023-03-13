@@ -7,10 +7,13 @@ import {
     updateTokenUser,
     deleteUser
 } from "../controllers/UserController.js";
-
+import {forgotPassword, resetPasswordToken} from '../controllers/UserResetPass.js'
 import { verifyUser,adminOnly } from '../middleware/AuthUser.js';
 
 const router = express.Router()
+
+router.post('/forgotPassword', verifyUser, adminOnly, forgotPassword)
+router.post('/reset-password/:token',  resetPasswordToken)
 
 router.get('/users',verifyUser,adminOnly, getUsers);
 router.get('/users/:id',verifyUser,adminOnly,  getUserById);

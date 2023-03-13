@@ -200,14 +200,14 @@ const db1 = mysql.createConnection({
 };
 
 // Example usage
-compareDatabases()
-  .then((result) => {
-    console.log('Matches:', result.matches);
-    console.log('Mismatches:', result.mismatches);
-  })
-  .catch((err) => {
-    console.error('Error:', err);
-  });
+// compareDatabases()
+//   .then((result) => {
+//     console.log('Matches:', result.matches);
+//     console.log('Mismatches:', result.mismatches);
+//   })
+//   .catch((err) => {
+//     console.error('Error:', err);
+//   });
 
   app.get('/pass-fail', async (req, res) => {
     const passFailData = await compareDatabases();
