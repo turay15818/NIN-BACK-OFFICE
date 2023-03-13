@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import {
   CRow,
   CCol,
@@ -14,6 +15,17 @@ import CIcon from '@coreui/icons-react'
 import { cilArrowBottom, cilArrowTop, cilOptions } from '@coreui/icons'
 
 const WidgetsDropdown = () => {
+  // const [users, setUsers] = useState([])
+
+  // useEffect(() => {
+  //   getUsers()
+  // }, [])
+
+  // const getUsers = async () => {
+  //   const response = await axios.get('http://localhost:4366/users')
+  //   setUsers(response.data)
+  // }
+
   return (
     <CRow>
       <CCol sm={6} lg={3}>
@@ -22,9 +34,9 @@ const WidgetsDropdown = () => {
           color="primary"
           value={
             <>
-              26K{' '}
+              users{' '}
               <span className="fs-6 fw-normal">
-                (-12.4% <CIcon icon={cilArrowBottom} />)
+                (12.4% <CIcon icon={cilArrowBottom} />)
               </span>
             </>
           }
@@ -109,7 +121,7 @@ const WidgetsDropdown = () => {
           color="info"
           value={
             <>
-              $6.200{' '}
+              Nin{' '}
               <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
               </span>
@@ -195,7 +207,7 @@ const WidgetsDropdown = () => {
           color="warning"
           value={
             <>
-              2.49{' '}
+              Approved{' '}
               <span className="fs-6 fw-normal">
                 (84.7% <CIcon icon={cilArrowTop} />)
               </span>
@@ -268,9 +280,9 @@ const WidgetsDropdown = () => {
           color="danger"
           value={
             <>
-              44K{' '}
+              Rejected{' '}
               <span className="fs-6 fw-normal">
-                (-23.6% <CIcon icon={cilArrowBottom} />)
+                (23.6% <CIcon icon={cilArrowBottom} />)
               </span>
             </>
           }

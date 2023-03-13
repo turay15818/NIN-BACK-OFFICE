@@ -1,4 +1,5 @@
-import { createStore } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
+import authReducer from './features/authSlice'
 
 const initialState = {
   sidebarShow: true,
@@ -13,5 +14,11 @@ const changeState = (state = initialState, { type, ...rest }) => {
   }
 }
 
-const store = createStore(changeState)
+const store = configureStore({
+  reducer: {
+    auth: authReducer,
+    change: changeState, // add your reducer function here
+  },
+})
+
 export default store
