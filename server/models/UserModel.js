@@ -11,7 +11,7 @@ const User = db.define('users',  {
             notEmpty:true
         },
     },
-    userID:{
+    userIDD:{
         type: DataTypes.STRING,
         allowNull:false,
         validate:{

@@ -26,3 +26,16 @@ export const adminOnly = async (req, res, next) => {
     next();
 }
 
+export const userOnly = async (req, res, next) => {
+    const user = await User.findOne({
+        where: {
+            id: req.session.userId
+        }
+    });
+    
+    if (!user) return res.status(404).json({ msg: "User not found" });
+    if (user.role !== "user") return res.status(403).json({ msg: "Access forbidden" });
+    next();
+}
+
+

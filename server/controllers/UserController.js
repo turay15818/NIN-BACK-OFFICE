@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 export const getUsers = async(req, res) =>{
     try{
        const response = await User.findAll({
-        attributes:['id', 'userUid', "userID", "userName", "userPhone", "userEmail", "role"]
+        attributes:['id', 'userUid', "userIDD", "userName", "userPhone", "userEmail", "role"]
        })
        res.status(200).json(response)
     }catch(error){
@@ -16,7 +16,7 @@ export const getUsers = async(req, res) =>{
 export const getUserById = async(req, res) =>{
     try{
         const response = await User.findOne({
-            attributes:['id', 'userUid', "userID", "userName", "userPhone", "userEmail", "role"],
+            attributes:['id', 'userUid', "userIDD", "userName", "userPhone", "userEmail", "role"],
             where: {
               id: req.params.id
             }
@@ -28,7 +28,7 @@ export const getUserById = async(req, res) =>{
 }
 
 export const createUser = async (req, res) => {
-    const { userID,userName, userPhone, userEmail, userPassword, confPassword, role } = req.body;
+    const { userIDD,userName, userPhone, userEmail, userPassword, confPassword, role } = req.body;
 
     // Password validation
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
@@ -41,7 +41,7 @@ export const createUser = async (req, res) => {
     const hashedPass = bcrypt.hashSync(userPassword, 10)
     try {
         await User.create({
-            userID:userID,
+            userIDD:userIDD,
             userName: userName,
             userEmail: userEmail,
             userPhone: userPhone,
@@ -66,7 +66,7 @@ export const updateUser = async (req, res) => {
         return res.status(404).json({ msg: "User not found" });
     }
 
-    const { userID,userName, userPhone, userEmail, userPassword, confPassword, role } = req.body;
+    const { userIDD,userName, userPhone, userEmail, userPassword, confPassword, role } = req.body;
 
     if (userPassword !== confPassword) {
         return res.status(400).json({ msg: "Password and Confirm Password do not match" });
@@ -91,7 +91,7 @@ export const updateUser = async (req, res) => {
     try {
         await User.update(
             {
-                userID:userID,
+                userIDD:userIDD,
                 userName: userName,
                 userEmail: userEmail,
                 userPhoneNo: userPhone,
@@ -154,7 +154,7 @@ export const deleteUser = async (req, res) => {
                 id: req.params.id
             }
         });
-        if (user) return res.status(200).json({ alert: "Are Sure Do you want to delete this user" });
+        if (user) return res.status(200).json({ alert: "Are you sure!! you want to delete this user" });
         res.status(200).json({ msg: "User Deleted" });
     } catch (error) {
         res.status(400).json({ msg: error.message });

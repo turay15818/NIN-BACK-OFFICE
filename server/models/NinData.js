@@ -83,6 +83,27 @@ const Nin = db.define('nin',  {
             notEmpty:true,
         },
     },
+    confirm:{
+        type: DataTypes.STRING,
+        allowNull:false,
+        validate:{
+            notEmpty:true,
+        },
+    },
+    confirmName:{
+        type: DataTypes.STRING,
+        allowNull:false,
+        validate:{
+            notEmpty:true,
+        },
+    },
+   confirmDate:{
+        type: DataTypes.STRING,
+        allowNull:false,
+        validate:{
+            notEmpty:true,
+        },
+    },
     userId:{
         type: DataTypes.INTEGER,
         allowNull: false,
