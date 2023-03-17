@@ -52,6 +52,62 @@ export const getNin = async(req,res) =>{
     
 }
 
+export const ninSearch = async(req,res) =>{
+    const {startDate, endDate}=req.body
+    try{
+        let response;
+        if(req.role ==="admin"){
+            response = await Nin.findAll({
+            where:{
+                 createdAt: {
+                    [Op.between]: [startDate, endDate]
+                 }
+            },
+            order:[
+               [ 'createdAt', 'DESC']
+            ],
+            include: [{
+                model: User,
+                attributes: ['id', 'userUid', "userIDD", "userName", "userPhone", "userEmail", "role"]
+            }]
+               
+          
+            })
+        }
+        res.status(200).json(response)
+    }catch(error){
+        res.status(500).json({msg:error.message})
+    }
+    
+}
+
+export const ninSearchByNin = async(req,res) =>{
+    const {userId}=req.body
+    try{
+        let response;
+        if(req.role ==="admin"){
+            response = await Nin.findAll({
+            where:{
+                id_number: userId
+            },
+            order:[
+               [ 'createdAt', 'DESC']
+            ],
+            include: [{
+                model: User,
+                attributes: ['id', 'userUid', "userIDD", "userName", "userPhone", "userEmail", "role"]
+            }]
+               
+          
+            })
+        }
+        res.status(200).json(response)
+    }catch(error){
+        res.status(500).json({msg:error.message})
+    }
+    
+}
+
 export const getNinById = async (req, res) => {
     try {
         const nin = await Nin.findOne({
