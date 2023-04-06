@@ -3,8 +3,8 @@ import User from "../models/UserModel.js";
 import { Op } from "sequelize";
 
 
-
-export const getNin = async(req,res) =>{
+//to get all the data from the data base both the admin and kyc staff
+export const getNCRANinData = async(req,res) =>{
     try{
         let response;
         if(req.role ==="admin"){
@@ -12,7 +12,7 @@ export const getNin = async(req,res) =>{
                 attributes:[
                 'id', 'confirmnininfo_by_customer', 'date_created', 'dateofbirth', 'fullname', 
                 'gender', 'id_number', 'id_type', 'nationality', 'permanent_residential_address',
-                'confirm', 'confirmDate','confirmName'
+                'confirm', 'confirmDate','confirmName',"revisedReason"
             ],
             order:[
                [ 'createdAt', 'DESC']
@@ -31,7 +31,7 @@ export const getNin = async(req,res) =>{
                response = await Nin.findAll({
                         attributes:[
                             'id', 'confirmnininfo_by_customer', 'date_created', 'dateofbirth', 'fullname', 
-                            'gender', 'id_number', 'id_type', 'nationality', 'permanent_residential_address','confirm'
+                            'gender', 'id_number', 'id_type', 'nationality', 'permanent_residential_address','confirm',"revisedReason"
                             
                         ],
                         order:[
@@ -53,6 +53,7 @@ export const getNin = async(req,res) =>{
     
 }
 
+//this is to search for specific days, day, and time and give report 
 export const ninSearch = async(req,res) =>{
     const {startDate, endDate}=req.body
     try{
@@ -82,6 +83,7 @@ export const ninSearch = async(req,res) =>{
     
 }
 
+//this is to search NIN NCRA  for specific days, day, and time and give report 
 export const ninSearchh = async(req,res) =>{
     const {userId}=req.body
     try{
@@ -109,22 +111,23 @@ export const ninSearchh = async(req,res) =>{
     
 }
 
+//Get individual user
 export const getNinById = async (req, res) => {
     try {
-        const nin = await Nin.findOne({
+        const ncra_nin_data = await Nin.findOne({
             where: {
                 id: req.params.id
             },
         });
-        if (!nin) return res.status(404).json({ msg: "Data Not Found" });
+        if (!ncra_nin_data) return res.status(404).json({ msg: "Data Not Found" });
         let response;
         if (req.role === "admin") {
             response = await Nin.findOne({
                 attributes: ['id', 'confirmnininfo_by_customer', 'date_created', 'dateofbirth', 'fullname', 
                 'gender', 'id_number', 'id_type', 'nationality', 'permanent_residential_address',
-                'confirm', 'confirmDate','confirmName'],
+                'confirm', 'confirmDate','confirmName', "revisedReason"],
                 where: {
-                    id: nin.id
+                    id: ncra_nin_data.id
                 },
                 order: [
                     ['createdAt', 'DESC'],
@@ -141,9 +144,9 @@ export const getNinById = async (req, res) => {
                 response = await Nin.findOne({
                     attributes: ['id', 'confirmnininfo_by_customer', 'date_created', 'dateofbirth', 'fullname', 
                     'gender', 'id_number', 'id_type', 'nationality', 'permanent_residential_address',
-                    'confirm'],
+                    'confirm', "revisedReason"],
                     where: {
-                        id: nin.id
+                        id: ncra_nin_data.id
                     },
                     order: [
                         ['createdAt', 'DESC'],
@@ -161,11 +164,12 @@ export const getNinById = async (req, res) => {
     }
 }
 
+//create temporal data for ncra nin
 export const ninCreate = async(req, res) =>{
     const{
         confirmnininfo_by_customer, date_created,dateofbirth, fullname,
         gender,id_number ,id_type,nationality, permanent_residential_address,
-        confirm, confirmDate, confirmName,
+        confirm, confirmDate, confirmName,revisedReason
     }=req.body;
         try{
            await Nin.create({
@@ -181,6 +185,7 @@ export const ninCreate = async(req, res) =>{
             confirm:confirm,
             confirmDate:confirmDate,
             confirmName:confirmName,
+            revisedReason:revisedReason,
 
             userId: req.userId
           })
@@ -189,6 +194,7 @@ export const ninCreate = async(req, res) =>{
         }
 }
 
+//get all confirmed data
 export const getDataByConfirmed = async(req, res) =>{
     try{
         let response;
@@ -237,6 +243,7 @@ export const getDataByConfirmed = async(req, res) =>{
     }
 }
 
+//get all rejected data
 export const getDataByRejected = async(req, res) =>{
     try{
         let response;
@@ -286,29 +293,29 @@ export const getDataByRejected = async(req, res) =>{
 
 export const updateNin = async (req, res) => {
     try {
-        const nin = await Nin.findOne({
+        const ncra_nin_data = await Nin.findOne({
             where: {
                 id: req.params.id
             }
         });
 
-        if (!nin) return res.status(404).json({ msg: "No Nin Found" });
+        if (!ncra_nin_data) return res.status(404).json({ msg: "No Nin Found" });
 
-        const { confirm, confirmDate, confirmName } = req.body;
+        const { confirm, confirmDate, confirmName,revisedReason } = req.body;
         if (req.role === "user", "admin") {
-            await Nin.update({confirm, confirmDate, confirmName }, {
+            await Nin.update({confirm, confirmDate, confirmName,revisedReason }, {
                 where: {
-                    id: nin.id
+                    id: ncra_nin_data.id
                 }
             });
         }
 
         else {
             if (req.role === "admin", "user") {
-                if (req.userId !== nin.userId) return res.status(403).json({ msg: "Access Forbidden" });
-                await Nin.update({ confirm, confirmDate, confirmName }, {
+                if (req.userId !== ncra_nin_data.userId) return res.status(403).json({ msg: "Access Forbidden" });
+                await Nin.update({ confirm, confirmDate, confirmName,revisedReason }, {
                     where: {
-                        [Op.and]: [{ id: nin.id }, { userId: req.userId }]
+                        [Op.and]: [{ id: ncra_nin_data.id }, { userId: req.userId }]
                     }
                 });
             }
@@ -319,6 +326,7 @@ export const updateNin = async (req, res) => {
     }
 }
 
+//chart for just a day confirmed ncra nin data
 export const getRecountConfirm = async(req,res) =>{
     try{
         const today = new Date(); // Get the current date and time
@@ -377,6 +385,7 @@ res.status(200).json(response)
 }
 }
 
+// chart for just a day rejected ncra nin data
 export const getRecountReject = async(req,res) =>{
     try{
         const today = new Date(); // Get the current date and time
@@ -387,7 +396,7 @@ export const getRecountReject = async(req,res) =>{
       response = await Nin.findAll({
       attributes: [
       "id", "confirmnininfo_by_customer", "date_created","dateofbirth", "fullname","gender","id_number", "id_type",
-      "nationality", "permanent_residential_address", "confirm", "confirmDate", "confirmName",
+      "nationality", "permanent_residential_address", "confirm", "confirmDate", "confirmName","revisedReason"
     ],
     where: {
       confirm: "Rejected",
@@ -408,7 +417,7 @@ export const getRecountReject = async(req,res) =>{
        response = await Nin.findAll({
       attributes: [
         "id", "confirmnininfo_by_customer","date_created","dateofbirth","fullname","gender","id_number","id_type",
-         "nationality", "permanent_residential_address", "confirm",
+         "nationality", "permanent_residential_address", "confirm","revisedReason"
       ],
       where: {
         confirm: "Rejected",
@@ -445,7 +454,7 @@ export const getRecountPending = async(req,res) =>{
       response = await Nin.findAll({
       attributes: [
       "id", "confirmnininfo_by_customer", "date_created","dateofbirth", "fullname","gender","id_number", "id_type",
-      "nationality", "permanent_residential_address", "confirm", "confirmDate", "confirmName",
+      "nationality", "permanent_residential_address", "confirm", "confirmDate", "confirmName","revisedReason"
     ],
     where: {
       confirm: "Pending",
@@ -466,7 +475,7 @@ export const getRecountPending = async(req,res) =>{
        response = await Nin.findAll({
       attributes: [
         "id", "confirmnininfo_by_customer","date_created","dateofbirth","fullname","gender","id_number","id_type",
-         "nationality", "permanent_residential_address", "confirm",
+         "nationality", "permanent_residential_address", "confirm","revisedReason"
       ],
       where: {
         confirm: "Pending",
@@ -494,6 +503,7 @@ res.status(200).json(response)
 }
 
 
+//chart for just a day pending ncra nin data
 export const getCountOneHour = async(req,res) =>{
     try{
         const now = new Date(); // Get the current date and time

@@ -47,16 +47,16 @@ const getUsers = async () => {
   setUsers(response.data);
 };
 
-
-const [nin, setNin] = useState([]);
+const [ncraNinData, setNcraNinData] = useState([]);
 
 useEffect(() => {
-    getNin();
+  getNcraNinData();
 }, []);
 
-const getNin = async () => {
-  const response = await axios.get("http://localhost:4366/nin");
-  setNin(response.data);
+const getNcraNinData = async () => {
+  const response = await axios.get("http://localhost:4366/ncraNinData");
+  setNcraNinData(response.data);
+  console.log(response)
 };
 
 
@@ -111,6 +111,13 @@ const [auditPerDay, setAuditPerDay] = useState([]);
     setAuditPerDay(response.data);
   };
 
+  useEffect(() =>{
+    const intervalId = setInterval(() => {
+      window.location.reload();
+    }, 603000); // refresh every 10 minutes 3 seconds
+  
+    return () => clearInterval(intervalId);
+  },[])
 
   return (
     <>
@@ -129,12 +136,12 @@ const [auditPerDay, setAuditPerDay] = useState([]);
             <CCardBody>
               <CChartBar
                 data={{
-                  labels: ['Confirmed', 'Rejected'],
+                  labels: ['Users', 'NCRA NIN'],
                   datasets: [
                     {
                       label: 'NCRA NIN',
                       backgroundColor: ['black', '#ff6600'],
-                      data: [`${users.length}`,`${nin.length}`],
+                      data: [`${users.length}`,`${ncraNinData.length}`],
                     },
                   ],
                 }}

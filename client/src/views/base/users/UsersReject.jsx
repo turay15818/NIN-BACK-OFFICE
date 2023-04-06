@@ -39,11 +39,6 @@ const UsersReject = () => {
 
   useEffect(() => {
     getDataByRejected();
-    const intervalId = setInterval(() => {
-      window.location.reload();
-    }, 603000); // refresh every 5 minutes
-  
-    return () => clearInterval(intervalId);
   }, []);
 
   const getDataByRejected = async () => {
@@ -76,14 +71,14 @@ const UsersReject = () => {
             <CCol xs={12}>
               <CCard>
                  <CCardHeader>
-                   <strong>Rejected NIN</strong>
+                   <strong>SUBSCRIBER REJECTED TABLE </strong>
                  </CCardHeader>
                   <CCardBody>
                     <Table hover size="sm" responsive  id="table">
            <thead className="thead-dark" id="table">
           <tr>
             <th >No</th>
-            <th >conf Customer</th>
+            <th >Subscriber</th>
             <th >Date Created</th>
             <th >DOB</th>
             <th >FullName</th>
@@ -91,8 +86,8 @@ const UsersReject = () => {
             <th >ID NO</th>
             <th >ID Type</th>
             <th >Nationality</th>
-            <th >Per Resident</th>
-            <th>ApprovedBy</th>
+            <th >Address</th>
+            <th>KYC Confirmed</th>
             
           </tr>
         </thead>

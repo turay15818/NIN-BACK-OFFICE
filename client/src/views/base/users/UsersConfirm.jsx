@@ -40,11 +40,6 @@ const UsersConfirm = () => {
 
   useEffect(() => {
     getDataByConfirmed();
-    const intervalId = setInterval(() => {
-      window.location.reload();
-    }, 603000); // refresh every 5 minutes
-  
-    return () => clearInterval(intervalId);
   }, []);
 
   const getDataByConfirmed = async () => {
@@ -70,23 +65,6 @@ const UsersConfirm = () => {
     );
 });
 
-
-//Session auto logout after inactivity
-useEffect(() => {
-  const intervalId = setInterval(() => {
-    axios.get('/ping')
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, 5 * 60 * 1000); // 5 minutes in milliseconds
-
-  return () => clearInterval(intervalId);
-}, []);
-
-
     return (
         <>
         <CRow>
@@ -95,14 +73,14 @@ useEffect(() => {
             <CCol xs={12}>
               <CCard>
                  <CCardHeader>
-                   <strong>Confirm NiN</strong>
+                   <strong>SUBSCRIBER CONFIRMED TABLE</strong>
                  </CCardHeader>
                   <CCardBody>
                     <Table hover size="sm" responsive  id="confirm">
            <thead className="thead-dark">
           <tr>
             <th >No</th>
-            <th >conf Customer</th>
+            <th >Subscriber</th>
             <th >Date Created</th>
             <th >DOB</th>
             <th >FullName</th>
@@ -110,8 +88,8 @@ useEffect(() => {
             <th >ID NO</th>
             <th >ID Type</th>
             <th >Nationality</th>
-            <th >Per Resident</th>
-            <th>ApprovedBy</th>
+            <th >Address</th>
+            <th>KYC Confirmed</th>
             
             
           </tr>

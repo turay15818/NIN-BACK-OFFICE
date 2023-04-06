@@ -5,7 +5,10 @@ import bcrypt from 'bcrypt';
 export const getUsers = async(req, res) =>{
     try{
        const response = await User.findAll({
-        attributes:['id', 'userUid', "userIDD", "userName", "userPhone", "userEmail", "role"]
+        attributes:['id', 'userUid', "userIDD", "userName", "userPhone", "userEmail", "role"],
+        order:[
+            ['createdAt', 'DESC']
+        ]
        })
        res.status(200).json(response)
     }catch(error){

@@ -82,8 +82,6 @@ const ViewDetails = () => {
         getNinById();
     }, [id]);
 
-
-    
     const cent={
         paddingLeft:'100px',
         fontSize:'15px',

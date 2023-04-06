@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 import {
@@ -17,12 +17,21 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import {cilUser } from '@coreui/icons'
+import moment from 'moment'
+import { useSelector } from "react-redux";
 
 const ResetPass = () => {
 
   const [userEmail, setUserEmail] = useState("")
   const [message, setMessage] = useState("")
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+
+
+  const currentDate = moment().format('DD-MM-YYYY')
+  const date = new Date();
+  const current_time = date.getHours() + ":" + " " + date.getMinutes() + ":" + " " + date.getSeconds();
+  const today = current_time + "  " + currentDate;
 
   const SendResetLink = async (e) => {
       e.preventDefault();
@@ -31,6 +40,14 @@ const ResetPass = () => {
             userEmail: userEmail,
 
           });
+          const actor = user.userName; 
+          const action = 'Reset Password Form';
+          const performedDate = today;
+          await axios.post('http://localhost:4366/auditTrail', { 
+          actor, 
+          action, 
+          performedDate,
+          });
           navigate("/base/crud/usersList");
       } catch (error) {
           if (error.response) {
@@ -38,7 +55,6 @@ const ResetPass = () => {
           }
       }
   };
-
 
 
 

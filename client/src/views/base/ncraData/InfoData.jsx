@@ -42,22 +42,29 @@ const InfoData = () => {
 
 const currentDate = moment().format('DD-MM-YYYY')
 const date = new Date();
-const current_time = date.getHours() + ":" + " " + date.getMinutes();
+const current_time = date.getHours() + ":" + " " + date.getMinutes()  + ":" + " " + date.getSeconds();
 const today = current_time + "  " + currentDate;
 
-    const [nin, setNin] = useState([]);
+    const [ncraNinData, setNcraNinData] = useState([]);
 
   useEffect(() => {
-    getNin();
+    getNcraNinData();
+    
+    const intervalId = setInterval(() => {
+      window.location.reload();
+    }, 603000); // refresh every 10 minutes
+  
+    return () => clearInterval(intervalId);
   }, []);
 
-  const getNin = async () => {
-    const response = await axios.get("http://localhost:4366/nin");
-    setNin(response.data);
+  const getNcraNinData = async () => {
+    const response = await axios.get("http://localhost:4366/ncraNinData");
+    setNcraNinData(response.data);
     console.log(response)
   };
 
   
+  //datatable
   $(document).ready(function () {
     setTimeout(function () {
         $('#info').DataTable(
@@ -76,6 +83,8 @@ const today = current_time + "  " + currentDate;
     );
 });
   
+
+//audit trail
 const handleAuditTrails = async() => {
   const actor = user.userName;
   const action = 'Admin Confirm';
@@ -168,7 +177,7 @@ return (
         <>
         <CRow>
             {user&&user.role ==="admin" &&(
-                <CButton color="dark" style={{ border: "solid 2px yellow", margin: '2px', borderRadius: '3px', width:"20%", height:"6vh" }}>
+                <CButton color="dark" style={{ border: "solid 2px yellow", marginLeft: '11px', borderRadius: '3px', width:"20%", height:"6vh", }}>
                 <Link to="/base/ncraData/adminReporting" style={{ color: "yellow", textDecoration: "none", fontWeight: 700 }}
                  onClick={handleAudit}
                 >
@@ -178,7 +187,7 @@ return (
             )}
            
                {user&&user.role ==="admin" &&(
-                 <CButton color="dark" style={{ border: "solid 2px yellow", margin: '2px', borderRadius: '3px', width:"20%", height:"6vh" }}>
+                 <CButton color="dark" style={{ border: "solid 2px yellow", marginLeft: '2px', borderRadius: '3px', width:"20%", height:"6vh" }}>
                  <Link to="/base/ncraData/ninReporting" style={{ color: "yellow", textDecoration: "none", fontWeight: 700 }}
                   onClick={handleAudits}
                  >
@@ -191,7 +200,7 @@ return (
             <CCol xs={12}>
               <CCard>
                  <CCardHeader>
-                   <strong>Users Request List</strong>
+                   <strong>SUBSCRIBER NCRA DATA TABLE</strong>
                  </CCardHeader>
                   <CCardBody>
                     <Table hover size="sm" responsive  id="info">
@@ -199,30 +208,36 @@ return (
           <tr>
             <th >No</th>
             <th >FullName</th>
-            <th >Gender</th>
             <th >ID NO</th>
             <th >Nationality</th>
-            <th >Per Resident</th>
             <th>Status</th>
-            <th>Confirm</th>
-            <th>View</th>
+            <th>View Detail</th>
+            <th>KYC Confirmed</th>
         
           </tr>
         </thead>
         <tbody>
-          {nin.map((nin, index) => (
-            <tr key={nin.id}>
+          {ncraNinData.map((ncraNinData, index) => (
+            <tr key={ncraNinData.id}>
               <td>{index + 1}</td>
-              <td>{nin.fullname}</td>
-              <td>{nin.gender}</td>
-              <td>{nin.id_number}</td>
-              <td>{nin.nationality}</td>
-              <td>{nin.permanent_residential_address}</td>
-              <td>{nin.confirm}</td>
+              <td>{ncraNinData.fullname}</td>
+              <td>{ncraNinData.id_number}</td>
+              <td>{ncraNinData.nationality}</td>
+              <td>{ncraNinData.confirm}</td>
+              <td>
+              <CButton style={{ marginRight: "4px", backgroundColor:"black", border:"2px solid yellow" }} id="editUsers">
+                        <Link id="editUsers" style={{ textDecoration: "none", fontWeight: 700, color: 'white' }}
+                            to={`/base/admin/infoData/get/${ncraNinData.id}`}
+                            onClick={handleAuditTrail}
+
+                         >
+                         < BiEdit style={{ color: "yellow" }} />Details</Link>
+                  </CButton>
+              </td>
               <td>
                   <CButton style={{ marginRight: "4px", backgroundColor:"black", border:"2px solid yellow" }} id="myButton">
                         <Link id="editUsers" style={{ textDecoration: "none", fontWeight: 700, color: 'white' }}
-                            to={`/base/ncraData/infoData/${nin.id}`}
+                            to={`/base/ncraData/infoData/${ncraNinData.id}`}
                             onClick={handleAuditTrails}
 
                          >
@@ -230,17 +245,6 @@ return (
                   </CButton>
                  
               </td>
-              <td>
-              <CButton style={{ marginRight: "4px", backgroundColor:"black", border:"2px solid yellow" }} id="editUsers">
-                        <Link id="editUsers" style={{ textDecoration: "none", fontWeight: 700, color: 'white' }}
-                            to={`/base/admin/infoData/get/${nin.id}`}
-                            onClick={handleAuditTrail}
-
-                         >
-                         < BiEdit style={{ color: "yellow" }} />ViewDetail</Link>
-                  </CButton>
-              </td>
-              
             </tr>
           ))}
         </tbody>

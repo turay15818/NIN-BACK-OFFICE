@@ -27,18 +27,18 @@ const WidgetsDropdown = () => {
     setUsers(response.data)
   }
 
-  const [nin, setNin] = useState([]);
+  const [ncraNinData, setNcraNinData] = useState([]);
 
   useEffect(() => {
-    getNin();
+    getNcraNinData();
   }, []);
-
-  const getNin = async () => {
-    const response = await axios.get("http://localhost:4366/nin");
-    setNin(response.data);
+  
+  const getNcraNinData = async () => {
+    const response = await axios.get("http://localhost:4366/ncraNinData");
+    setNcraNinData(response.data);
     console.log(response)
   };
-
+  
 
   const [dataByRejected, setDataByRejected] = useState([]);
 
@@ -128,10 +128,10 @@ const WidgetsDropdown = () => {
           color="dark"
           value={
             <>
-              {nin.length}
+              {ncraNinData.length}
 
               <span className="fs-6 fw-normal">
-                ({nin.length}% <CIcon icon={cilArrowTop} />)
+                ({ncraNinData.length}% <CIcon icon={cilArrowTop} />)
               </span>
               <img
                 src="https://www.svgrepo.com/show/41634/24-hours.svg"

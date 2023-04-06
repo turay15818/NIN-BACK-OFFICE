@@ -76,29 +76,8 @@ const ViewDetail = () => {
             
         };
         getNinById();
-        const intervalId = setInterval(() => {
-            window.location.reload();
-          }, 603000); // refresh every 5 minutes
-        
-          return () => clearInterval(intervalId);
     }, [id]);
 
-
-    //Session auto logout after inactivity
-   useEffect(() => {
-    const intervalId = setInterval(() => {
-      axios.get('/ping')
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }, 5 * 60 * 1000); // 5 minutes in milliseconds
-  
-    return () => clearInterval(intervalId);
-  }, []);
-    
     const cent={
         paddingLeft:'100px',
         fontSize:'15px',

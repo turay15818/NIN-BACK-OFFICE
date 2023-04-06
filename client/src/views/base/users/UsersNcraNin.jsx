@@ -42,24 +42,26 @@ const UsersNcraNin = () => {
 
   
 
-    const [nin, setNin] = useState([]);
+    const [ncraNinData, setNcraNinData] = useState([]);
 
   useEffect(() => {
-    getNin();
+    getNcraNinData();
     const intervalId = setInterval(() => {
       window.location.reload();
-    }, 603000); // refresh every 5 minutes
+    }, 603000); // refresh every 10 minutes
   
     return () => clearInterval(intervalId);
   }, []);
 
-  const getNin = async () => {
-    const response = await axios.get("http://localhost:4366/nin");
-    setNin(response.data);
+  const getNcraNinData = async () => {
+    const response = await axios.get("http://localhost:4366/ncraNinData");
+    setNcraNinData(response.data);
     console.log(response)
   };
 
   
+
+  //datatable
   $(document).ready(function () {
     setTimeout(function () {
         $('#info').DataTable(
@@ -98,6 +100,7 @@ const makeStyles = (confirm) => {
   } 
 }
 
+//audit trail
 const handleAuditTrail = async() => {
   const actor = user.userName;
   const action = 'View Detail NCRA NIN';
@@ -158,7 +161,7 @@ return (
             <CCol xs={12}>
               <CCard>
                  <CCardHeader>
-                   <strong className="text-center">Data From NCRA NIN</strong><br/>
+                   <strong className="text-center">SUBSCRIBER NCRA DATA TABLE</strong><br/>
                    <strong className="text-center">Please Ensure that you view the detail first before you can confirm</strong>
                  </CCardHeader>
                   <CCardBody>
@@ -167,39 +170,37 @@ return (
           <tr>
             <th >No</th>
             <th >FullName</th>
-            <th >Gender</th>
             <th >ID Type</th>
             <th >Nationality</th>
-            <th >Resident</th>
             <th>Status</th>
-            <th>Confirm</th>
-            <th>View</th>
+            <th>Reason</th>
+            <th>View Details</th>
+            <th>KYC Confirmed</th>
             
           </tr>
         </thead>
         <tbody>
-          {nin.map((nin, index) => (
-            <tr key={nin.id}>
+          {ncraNinData.map((ncraNinData, index) => (
+            <tr key={ncraNinData.id}>
               <td>{index + 1}</td>
-              <td>{nin.fullname}</td>
-              <td>{nin.gender}</td>
-              <td>{nin.id_type}</td>
-              <td>{nin.nationality}</td>
-              <td>{nin.permanent_residential_address}</td>
-              <td >{nin.confirm}</td>
+              <td>{ncraNinData.fullname}</td>
+              <td>{ncraNinData.id_type}</td>
+              <td>{ncraNinData.nationality}</td>
+              <td >{ncraNinData.confirm}</td>
+              <td >{ncraNinData.revisedReason}</td>
               <td>
               <CButton style={{ marginRight: "4px", backgroundColor:"black", border:"2px solid yellow" }}id="editUsers">
                         <Link id="editUsers" style={{ textDecoration: "none", fontWeight: 700, color: 'white' }}
-                            to={`/base/users/userNcraNin/get/${nin.id}`}
+                            to={`/base/users/userNcraNin/get/${ncraNinData.id}`}
                             onClick={handleAuditTrail}
                          >
-                         < BiEdit style={{ color: "yellow" }} />ViewDetail</Link>
+                         < BiEdit style={{ color: "yellow" }} />Details</Link>
                   </CButton>
               </td>
               <td>
-                  <CButton disabled={makeStyles(nin.confirm)} style={{ marginRight: "4px", backgroundColor:"black", border:"2px solid yellow" }} id="editUsers">
+                  <CButton disabled={makeStyles(ncraNinData.confirm)} style={{ marginRight: "4px", backgroundColor:"black", border:"2px solid yellow" }} id="editUsers">
                         <Link id="editUsers" style={{ textDecoration: "none", fontWeight: 700, color: 'white' }}
-                            to={`/base/users/userNcraNin/${nin.id}`}
+                            to={`/base/users/userNcraNin/${ncraNinData.id}`}
                             onClick={handleAuditTrails}
 
                          >

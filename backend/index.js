@@ -45,7 +45,7 @@ app.use(session({
     }
 }));
 
-//Session auto logout after inactivity
+ //Session auto logout after inactivity
 app.get('/ping', (req, res) => {
     req.session.lastActivity = new Date().getTime();
     res.send('Pong!');

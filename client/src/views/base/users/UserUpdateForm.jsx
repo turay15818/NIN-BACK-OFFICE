@@ -43,7 +43,7 @@ const UserUpdateForm = () => {
    
 
     const [confirm, setConfirm] = useState('');
-    var [confirmName, setConfirmName] = useState(`${user.userName}`);
+    var [confirmName, setConfirmName] = useState(`${user&&user.userName}`);
    var [confirmDate, setConfirmDate] = useState(`${today}`);
     const [msg, setMsg] = useState("");
     const { id } = useParams();
@@ -68,11 +68,6 @@ const UserUpdateForm = () => {
           }
         };
         getNinById();
-        const intervalId = setInterval(() => {
-          window.location.reload();
-        }, 603000); // refresh every 5 minutes
-      
-        return () => clearInterval(intervalId);
       }, [id]);
     
 
@@ -82,12 +77,12 @@ const UserUpdateForm = () => {
         try {
           await axios.patch(`http://localhost:4366/nin/${id}`, {
             confirm: confirm,
-            confirmName: confirmName,
-            confirmDate: confirmDate,
+            confirmName: confirmName =(`${user&&user.userName}`),
+            confirmDate: confirmDate =(`${today}`),
           });
     
           const actor = user.userName; 
-          const action = 'updated NIN request';
+          const action = `${user.userName}updated NIN NCRA request`;
           const performedDate = today;
           await axios.post('http://localhost:4366/auditTrail', { 
             actor, 
@@ -103,23 +98,6 @@ const UserUpdateForm = () => {
         }
       };
     
-
-
-//Session auto logout after inactivity
-useEffect(() => {
-  const intervalId = setInterval(() => {
-    axios.get('/ping')
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, 5 * 60 * 1000); // 5 minutes in milliseconds
-
-  return () => clearInterval(intervalId);
-}, []);
-
       return (
       <div className="bg-light min-vh-100 d-flex flex-row align-items-center login-page">
       <CContainer>
@@ -133,8 +111,9 @@ useEffect(() => {
                     <p className="text-medium-emphasis" style={{ textAlign: "center" }}>By Approve or Reject</p>
                     {isError&& <p>{msg}</p>}
                     <CFormInput
-                      type="text"
-                      value={user.userName}
+                      
+                      type="hidden"
+                      value={user&&user.userName}
                       onChange={(e)=> setConfirmName(e.target.value)}
                       placeholder="Your Name"
                       autoComplete="text"
@@ -153,7 +132,7 @@ useEffect(() => {
                     </CFormSelect>
                     </CInputGroup>
                     <CFormInput
-                      type="text"
+                      type="hidden"
                       value={today}
                       onChange={(e)=> setConfirmDate(e.target.value)}
                       placeholder="Your Name"
@@ -166,7 +145,7 @@ useEffect(() => {
                         <hr />
 
                         <div className="d-grid gap-2">
-                          <CButton id="login" style={{ backgroundColor: '#ff6600', border: 'solid 2px #ff6600' }} type="submit">Submit</CButton>
+                          <CButton id="login" style={{ backgroundColor: 'black', border: 'solid 2px yellow' }} type="submit">Submit</CButton>
                         </div>
 
                       </CCol>

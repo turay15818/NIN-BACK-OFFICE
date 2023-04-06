@@ -33,6 +33,11 @@ const AuditTrail = () =>{
 
     useEffect(() =>{
         getAuditTrail()
+        const intervalId = setInterval(() => {
+          window.location.reload();
+        }, 603000); // refresh every 10 minutes 3 seconds
+      
+        return () => clearInterval(intervalId);
     },[]);
 
     const getAuditTrail = async() =>{

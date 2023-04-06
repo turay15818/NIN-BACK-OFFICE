@@ -75,6 +75,22 @@ const AddUsers = () => {
             }
         }
     };
+
+    //Session auto logout after inactivity
+    useEffect(() => {
+    const intervalId = setInterval(() => {
+      axios.get('/ping')
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }, 5 * 60 * 1000); // 5 minutes in milliseconds
+  
+    return () => clearInterval(intervalId);
+   }, []);
+  
     return (
         <CRow>
 

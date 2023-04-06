@@ -42,15 +42,15 @@ const Dashboard = () => {
   }
 
   //NCRA NIN
-  const [nin, setNin] = useState([]);
+  const [ncraNinData, setNcraNinData] = useState([]);
 
   useEffect(() => {
-    getNin();
+    getNcraNinData();
   }, []);
 
-  const getNin = async () => {
-    const response = await axios.get("http://localhost:4366/nin");
-    setNin(response.data);
+  const getNcraNinData = async () => {
+    const response = await axios.get("http://localhost:4366/ncraNinData");
+    setNcraNinData(response.data);
     console.log(response)
   };
 
@@ -64,7 +64,6 @@ const Dashboard = () => {
   const getDataByRejected = async () => {
     const response = await axios.get("http://localhost:4366/dataByRejected");
     setDataByRejected(response.data);
-    // console.log(response)
   };
 
 
@@ -78,47 +77,21 @@ const Dashboard = () => {
   const getDataByConfirmed = async () => {
     const response = await axios.get("http://localhost:4366/dataByConfirmed");
     setDataByConfirmed(response.data);
-    // console.log(response)
   };
 
   const progressGroupExample2 = [
     { title: 'USERS', icon: cilUser, value: users.length/100 },
-    { title: 'NCRA NIN DATA', icon: cilUserFemale, value:nin.length/100 },
+    { title: 'NCRA NIN DATA', icon: cilUserFemale, value:ncraNinData.length/100 },
     { title: 'NCRA NIN CONFIRM', icon: cilUserFemale, value: dataByConfirmed.length/100 },
     { title: 'NCRA NIN REJECT', icon: cilUserFemale, value: dataByRejected.length/100 },
   ]
-
-  // function PingServer() {
-  //   useEffect(() => {
-  //     const intervalId = setInterval(() => {
-  //       axios.get('/ping')
-  //         .then(response => {
-  //           console.log(response.data);
-  //         })
-  //         .catch(error => {
-  //           console.log(error);
-  //         });
-  //     }, 5 * 60 * 1000); // 5 minutes in milliseconds
   
-  //     return () => clearInterval(intervalId);
-  //   }, []);
-  
-  //   return null;
-  // }
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      axios.get('/ping')
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }, 5 * 60 * 1000); // 5 minutes in milliseconds
-
-    return () => clearInterval(intervalId);
-  }, []);
+  useEffect(() =>{
+    const interValid = setInterval(() =>{
+      window.location.reload()
+    }, 603000);
+    return () => setInterval(interValid);
+  },[])
 
   return (
     <>

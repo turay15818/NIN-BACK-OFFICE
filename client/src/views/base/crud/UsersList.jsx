@@ -76,10 +76,6 @@ const UsersList = () => {
         setUsers(response.data);
     };
 
-    // const deleteUser = async (userId) => {
-    //     await axios.delete(`http://localhost:2552/users/${userId}`);
-    //     getUsers();
-    // };
     const [visibleLg, setVisibleLg] = useState(false)
 
 //datatables
@@ -106,7 +102,7 @@ const UsersList = () => {
 
     const handleResetPassword = async() => {
         const actor = user.userName;
-        const action = 'Reset Password';
+        const action =  'Reset password';
         const performedDate = today;
         
         await axios.post('http://localhost:4366/auditTrail', { 
@@ -122,9 +118,9 @@ const UsersList = () => {
         });
       }
 
-      const handleAddUser = async() => {
+      const handleAdutTrail = async() => {
         const actor = user.userName;
-        const action = 'Add Users Botton ';
+        const action = 'Audit Trail Page ';
         const performedDate = today;
         
         await axios.post('http://localhost:4366/auditTrail', { 
@@ -142,7 +138,7 @@ const UsersList = () => {
 
       const handleEdit = async() => {
         const actor = user.userName;
-        const action = 'Edit Botton';
+        const action = 'User Edit Page';
         const performedDate = today;
         
         await axios.post('http://localhost:4366/auditTrail', { 
@@ -159,6 +155,22 @@ const UsersList = () => {
       }
 
 
+
+      //Session auto logout after inactivity
+    useEffect(() => {
+    const intervalId = setInterval(() => {
+      axios.get('/ping')
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }, 5 * 60 * 1000); // 5 minutes in milliseconds
+  
+    return () => clearInterval(intervalId);
+  }, []);
+  
 
     return (
         <>
@@ -204,6 +216,7 @@ const UsersList = () => {
                 {user&&user.role==="admin"&&(
                    <CButton color="dark" style={{ border: "solid 2px yellow", margin: '2px', borderRadius: '3px', width:"20%", height:"6vh" }}>
                    <Link to="/base/auditTrail/auditTrail" style={{ color: "yellow", textDecoration: "none", fontWeight: 700 }}
+                   onClick={handleAdutTrail}
                    >
                        <MdPendingActions style={{ color: "yellow", fontSize: "30px" }} />  Audit Trail
                    </Link>

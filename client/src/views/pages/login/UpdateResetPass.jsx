@@ -60,7 +60,7 @@ style={{
     <CCol md={4}>
       <CCardGroup>
         <CCard className="p-4">
-        <h4 className="has-text-centered" style={{fontSize:'15px', textAlign:"center", color:"#ff6600"}}>{message}</h4>
+        <h4 className="has-text-centered" style={{fontSize:'15px', textAlign:"center", color:"green"}}>{message}</h4>
           <CForm onSubmit={handleSubmit} className="box" style={{ width: "100%" }}>
             <h4 className="title is-4" style={{ textAlign: "center", fontWeight:' 800', fontSize:'15px' }}>Update your New Password</h4>
             <CFormInput

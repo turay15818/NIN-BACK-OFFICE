@@ -3,7 +3,7 @@ import db from '../config/Database.js'
 import Users from "./UserModel.js";
 const {DataTypes} = Sequelize;
 
-const Nin = db.define('nin',  {
+const Nin = db.define('ncra_nin_data',  {
     id:{
         type: DataTypes.BIGINT,
         primaryKey:true,
@@ -98,6 +98,13 @@ const Nin = db.define('nin',  {
         },
     },
    confirmDate:{
+        type: DataTypes.STRING,
+        allowNull:true,
+        validate:{
+            notEmpty:false,
+        },
+    },
+    revisedReason:{
         type: DataTypes.STRING,
         allowNull:true,
         validate:{

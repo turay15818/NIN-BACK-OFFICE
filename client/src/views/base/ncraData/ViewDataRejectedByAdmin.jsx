@@ -40,6 +40,7 @@ const ViewDataRejectedByAdmin = () => {
 
   useEffect(() => {
     getDataByRejected();
+    
   }, []);
 
   const getDataByRejected = async () => {
@@ -66,7 +67,6 @@ const ViewDataRejectedByAdmin = () => {
     );
 });
 
-
     return (
         <>
         <CRow>
@@ -75,14 +75,14 @@ const ViewDataRejectedByAdmin = () => {
             <CCol xs={12}>
               <CCard>
                  <CCardHeader>
-                   <strong>Users Request List</strong>
+                   <strong>SUBSCRIBER REJECTED TABLE</strong>
                  </CCardHeader>
                   <CCardBody>
                     <Table hover size="sm" responsive  id="table">
            <thead className="thead-dark" id="table">
           <tr>
             <th >No</th>
-            <th >conf Customer</th>
+            <th >Subscriber</th>
             <th >Date Created</th>
             <th >DOB</th>
             <th >FullName</th>
@@ -90,9 +90,9 @@ const ViewDataRejectedByAdmin = () => {
             <th >ID NO</th>
             <th >ID Type</th>
             <th >Nationality</th>
-            <th >Per Resident</th>
-            <th>Confirm</th>
-            <th>Staff Name</th>
+            <th >Address</th>
+            <th>KYC Confirmed</th>
+            <th>User Name</th>
             <th>confirm Date</th>
             
           </tr>

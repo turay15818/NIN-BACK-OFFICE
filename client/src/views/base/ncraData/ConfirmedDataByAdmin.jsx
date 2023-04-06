@@ -41,6 +41,7 @@ const ConfirmedDataByAdmin = () => {
 
   useEffect(() => {
     getDataByConfirmed();
+    
   }, []);
 
   const getDataByConfirmed = async () => {
@@ -78,24 +79,24 @@ const ConfirmedDataByAdmin = () => {
             <CCol xs={12}>
               <CCard>
                  <CCardHeader>
-                   <strong>Users Request List</strong>
+                   <strong>SUBSCRIBER CONFIRMED TABLE</strong>
                  </CCardHeader>
                   <CCardBody>
                     <Table hover size="sm" responsive  id="confirm">
            <thead className="thead-dark">
           <tr>
             <th >No</th>
-            <th >Customer</th>
+            <th >Subscriber</th>
             <th >Date</th>
             <th >DOB</th>
             <th >FullName</th>
             <th >Gender</th>
-            <th >ID_NO</th>
-            <th >ID_Type</th>
+            <th >ID NO</th>
+            <th >ID Type</th>
             <th >Nationality</th>
-            <th >Resident</th>
-            <th>ApprovedBy</th>
-            <th>ConfirmedBy</th>
+            <th >Address</th>
+            <th>KYC Confirmed</th>
+            <th>User Name</th>
             <th>Confirmed Date</th>
             
           </tr>

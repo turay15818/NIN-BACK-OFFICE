@@ -20,7 +20,7 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'NCRA NIN',
+    name: 'ALL NCRA NIN',
     to: '/base/ncraData/infoData',
     icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
   },

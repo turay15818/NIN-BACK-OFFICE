@@ -43,7 +43,7 @@ const EditNcraConfirm = () => {
    
 
     const [confirm, setConfirm] = useState('');
-    var [confirmName, setConfirmName] = useState(`${user.userName}`);
+    var [confirmName, setConfirmName] = useState(`${user&user.userName}`);
    var [confirmDate, setConfirmDate] = useState(`${today}`);
     const [msg, setMsg] = useState("");
     const { id } = useParams();
@@ -94,6 +94,7 @@ const EditNcraConfirm = () => {
         }
       };
     
+
       return (
       <div className="bg-light min-vh-100 d-flex flex-row align-items-center login-page">
       <CContainer>
@@ -108,7 +109,7 @@ const EditNcraConfirm = () => {
                     {isError&& <p>{msg}</p>}
                     <CFormInput
                       type="text"
-                      value={user.userName}
+                      value={user&user.userName}
                       onChange={(e)=> setConfirmName(e.target.value)}
                       placeholder="Your Name"
                       autoComplete="text"
@@ -141,7 +142,7 @@ const EditNcraConfirm = () => {
                         <hr />
 
                         <div className="d-grid gap-2">
-                          <CButton id="login" style={{ backgroundColor: '#ff6600', border: 'solid 2px #ff6600' }} type="submit">Submit</CButton>
+                          <CButton id="login" style={{ backgroundColor: 'black', border: 'solid 2px yellow' }} type="submit">Submit</CButton>
                         </div>
 
                       </CCol>

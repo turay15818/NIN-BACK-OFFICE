@@ -71,21 +71,15 @@ const UsersDashboard = () => {
     { title: 'NCRA NIN REJECT', icon: cilUserFemale, value: dataByRejected.length/100 },
   ]
 
-//Session auto logout after inactivity
-useEffect(() => {
-  const intervalId = setInterval(() => {
-    axios.get('/ping')
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, 5 * 60 * 1000); // 5 minutes in milliseconds
-
-  return () => clearInterval(intervalId);
-}, []);
-
+  //refresh after every 10 minutes 3 seconds
+  useEffect(() =>{
+    
+    const intervalId = setInterval(() => {
+      window.location.reload();
+    }, 603000); // refresh every 5 minutes
+  
+    return () => clearInterval(intervalId);
+  },[])
 
   return (
     <>

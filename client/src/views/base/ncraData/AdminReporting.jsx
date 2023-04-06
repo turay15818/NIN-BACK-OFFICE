@@ -101,19 +101,21 @@ const AdminReporting = () => {
 });
   
 
+  
 
   return (
     <><div className="bg-light min-vh-100 d-flex flex-row align-items-center login-page">
           <CContainer>
               <CRow className="justify-content-center">
-              {user&&user.role ==="admin" &&(
-                             <CButton color="dark" style={{ border: "solid 2px yellow", margin: '2px', borderRadius: '3px', width:"20%", height:"6vh" }}>
+                  <CCol md={5} style={{ marginTop: '-360px' }}>
+
+
+                  <CButton color="dark" style={{ border: "solid 2px yellow", margin: '2px', borderRadius: '3px', width:"20%", height:"6vh" }}>
                              <Link to="/base/ncraData/infoData" style={{ color: "yellow", textDecoration: "none", fontWeight: 700 }}>
-                            <MdPendingActions style={{ color: "yellow", fontSize: "30px" }} />  Back
+                            Go Back
                            </Link>
-                             </CButton>
-                             )}
-                  <CCol md={5} style={{ marginTop: '-370px' }}>
+                    </CButton>
+            
                       <CCardGroup>
                           <CCard className="p-4">
                               <CCardBody>
@@ -191,7 +193,7 @@ const AdminReporting = () => {
           </CContainer>
       </div><CRow>
 
-                  <CCol xs={14}  style={{ marginTop: '-380px' }}>
+                  <CCol xs={14}  style={{ marginTop: '-350px' }}>
                       <CCard>
                           <CCardHeader>
                               <strong>Report</strong>

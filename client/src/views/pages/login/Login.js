@@ -27,6 +27,12 @@ const Login = () => {
   const navigate = useNavigate()
   const { user, isError, isSuccess, isLoading, message } = useSelector((state) => state.auth)
 
+  const currentDate = moment().format('DD-MM-YYYY')
+  const date = new Date()
+  const current_time =
+    date.getHours() + ':' + ' ' + date.getMinutes() + ':' + ' ' + date.getSeconds()
+  const today = current_time + '  ' + currentDate
+
   useEffect(() => {
     if (user || isSuccess) {
       navigate('/dashboard')
@@ -37,40 +43,15 @@ const Login = () => {
   const Auth = async (e) => {
     e.preventDefault()
     dispatch(LoginUser({ userEmail, userPassword }))
-  }
-
-  const currentDate = moment().format('DD-MM-YYYY')
-  const date = new Date()
-  const current_time =
-    date.getHours() + ':' + ' ' + date.getMinutes() + ':' + ' ' + date.getSeconds()
-  const today = current_time + '  ' + currentDate
-  const handleAuditTrail = async () => {
     const actor = user.userName
-    const action = 'Reporting'
+    const action = 'login'
     const performedDate = today
-    await axios
-      .post(
-        'http://localhost:4366/auditTrail',
-        {
-          actor,
-          action,
-          performedDate,
-        },
-        {
-          Auth: {
-            userEmail,
-            userPassword,
-          },
-        },
-      )
-      .then((response) => {
-        console.log(response.data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    await axios.post('http://localhost:4366/auditTrail', {
+      actor,
+      action,
+      performedDate,
+    })
   }
-
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -122,7 +103,6 @@ const Login = () => {
                             border: '2px solid yellow',
                             color: 'yellow',
                           }}
-                          onClick={handleAuditTrail}
                         >
                           {isLoading ? 'Loading...' : 'Login'}
                         </CButton>
