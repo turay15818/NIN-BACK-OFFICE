@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import axios from 'axios'
 import Table from 'react-bootstrap/Table';
 import {
@@ -14,7 +14,6 @@ import {
     CRow,
     CFormInput,
   } from '@coreui/react'
-import ReactDatetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import "datatables.net-dt/js/dataTables.dataTables"
 import "datatables.net-dt/css/jquery.dataTables.min.css"
@@ -30,7 +29,6 @@ import "datatables.net-dt/css/jquery.dataTables.min.css"
 import $ from 'jquery';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-import { MdPendingActions } from 'react-icons/md';
 import {useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import moment from 'moment'
@@ -171,7 +169,7 @@ const NinReporting = () => {
                                       {ninSearchh.map((ninSearchh, index) => (
                                           <tr key={ninSearchh.id}>
                                               <td>{index + 1}</td>
-                                              <td>{ninSearchh.confirmnininfo_by_customer}</td>
+                                              <td>{ninSearchh.confirm_by_subscriber}</td>
                                               <td>{ninSearchh.date_created}</td>
                                               <td>{ninSearchh.dateofbirth}</td>
                                               <td>{ninSearchh.fullname}</td>
@@ -180,8 +178,8 @@ const NinReporting = () => {
                                               <td>{ninSearchh.id_type}</td>
                                               <td>{ninSearchh.nationality}</td>
                                               <td>{ninSearchh.permanent_residential_address}</td>
-                                              <td>{ninSearchh.confirm}</td>
-                                              <td>{ninSearchh.confirmName}</td>
+                                              <td>{ninSearchh.confirm_status}</td>
+                                              <td>{ninSearchh.confirmBy_kyc}</td>
                                               <td>{ninSearchh.confirmDate}</td>
 
                                           </tr>

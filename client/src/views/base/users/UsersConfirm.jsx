@@ -1,10 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
 import {
-    CButton,
     CCol,
     CRow,
     CCard,
@@ -12,7 +10,6 @@ import {
     CCardBody,
 
 } from '@coreui/react'
-import { BiEdit } from 'react-icons/bi';
 import { useSelector } from "react-redux";
 import "datatables.net-dt/js/dataTables.dataTables"
 import "datatables.net-dt/css/jquery.dataTables.min.css"
@@ -45,7 +42,6 @@ const UsersConfirm = () => {
   const getDataByConfirmed = async () => {
     const response = await axios.get("http://localhost:4366/dataByConfirmed");
     setDataByConfirmed(response.data);
-    // console.log(response)
   };
 
   //datatables
@@ -98,7 +94,7 @@ const UsersConfirm = () => {
           {dataByConfirmed.map((dataByConfirmed, index) => (
             <tr key={dataByConfirmed.id}>
               <td>{index + 1}</td>
-              <td>{dataByConfirmed.confirmnininfo_by_customer}</td>
+              <td>{dataByConfirmed.confirm_by_subscriber}</td>
               <td>{dataByConfirmed.date_created}</td>
               <td>{dataByConfirmed.dateofbirth}</td>
               <td>{dataByConfirmed.fullname}</td>
@@ -107,7 +103,7 @@ const UsersConfirm = () => {
               <td>{dataByConfirmed.id_type}</td>
               <td>{dataByConfirmed.nationality}</td>
               <td>{dataByConfirmed.permanent_residential_address}</td>
-              <td>{dataByConfirmed.confirm}</td>
+              <td>{dataByConfirmed.confirm_status}</td>
              
             </tr>
           ))}

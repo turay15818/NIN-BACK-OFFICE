@@ -34,7 +34,7 @@ const Chart = () => {
     }
   }, [isError, navigate]);
 
-//stock in use
+//Users API
 
 const [users, setUsers] = useState([]);
 
@@ -47,6 +47,7 @@ const getUsers = async () => {
   setUsers(response.data);
 };
 
+//NCRA NIN API
 const [ncraNinData, setNcraNinData] = useState([]);
 
 useEffect(() => {
@@ -100,16 +101,6 @@ const getRecountPending = async () => {
 };
 
 
-const [auditPerDay, setAuditPerDay] = useState([]);
-
-  useEffect(() => {
-    getAuditPerDay();
-  }, []);
-
-  const getAuditPerDay = async () => {
-    const response = await axios.get("http://localhost:4366/dataByConfirmed");
-    setAuditPerDay(response.data);
-  };
 
   useEffect(() =>{
     const intervalId = setInterval(() => {
@@ -152,7 +143,7 @@ const [auditPerDay, setAuditPerDay] = useState([]);
         </CCol>
         <CCol xs={6}>
           <CCard className="mb-4">
-            <CCardHeader>NCRA NIN CHART</CCardHeader>
+            <CCardHeader>KYC CONFIRM CHART</CCardHeader>
             <CCardBody>
               <CChartBar
                 data={{
@@ -161,7 +152,7 @@ const [auditPerDay, setAuditPerDay] = useState([]);
                     {
                       label: 'NCRA NIN',
                       backgroundColor: ['#ff6600', 'warning', '#243763'],
-                      data: [`${recountConfirm.length}`, `${recountReject.length}`, `${recountPending.length}`,`${auditPerDay.length}`],
+                      data: [`${recountConfirm.length}`, `${recountReject.length}`, `${recountPending.length}`],
                     },
                   ],
                 }}

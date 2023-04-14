@@ -47,7 +47,7 @@ const ViewDetail = () => {
     const [id_type, setId_type] = useState([]);
     const [nationality, setNationality] = useState([]);
     const [permanent_residential_address, setPermanent_residential_address] = useState([]);
-    const [confirm, setConfirm] = useState([]);
+    const [confirm_status, setConfirm_status] = useState([]);
 
 
     const [msg, setMsg] = useState("");
@@ -56,7 +56,7 @@ const ViewDetail = () => {
     useEffect(() => {
         const getNinById = async () => {
             try {
-                const response = await axios.get(`http://localhost:4366/nin/${id}`);
+                const response = await axios.get(`http://localhost:4366/ncra_nin_data/${id}`);
                 setConfirmation_by_customer(response.data.confirmnininfo_by_customer);
                 setDate_created(response.data.date_created);
                 setDateofbirth(response.data.dateofbirth);
@@ -66,7 +66,7 @@ const ViewDetail = () => {
                 setId_type(response.data.id_type);
                 setNationality(response.data.nationality);
                 setPermanent_residential_address(response.data.permanent_residential_address);
-                setConfirm(response.data.confirm);
+                setConfirm_status(response.data.confirm_status);
                 console.log(response)
             } catch (error) {
                 if (error.response) {
@@ -178,7 +178,7 @@ const ViewDetail = () => {
                                         
                                         <CListGroupItem>
                                         <div>
-                                           <h4 style={{marginTop:'10px'}}><span style={cent}>Confirm:</span> <span style={det}>{" " + " " + confirm}</span>  </h4>
+                                           <h4 style={{marginTop:'10px'}}><span style={cent}>Confirm:</span> <span style={det}>{" " + " " + confirm_status}</span>  </h4>
                                         </div>
                                         </CListGroupItem>
                                      

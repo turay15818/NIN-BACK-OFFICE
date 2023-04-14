@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
 import {
@@ -95,7 +94,7 @@ const UsersReject = () => {
           {dataByRejected.map((dataByRejected, index) => (
             <tr key={dataByRejected.id}>
               <td>{index + 1}</td>
-              <td>{dataByRejected.confirmnininfo_by_customer}</td>
+              <td>{dataByRejected.confirm_by_subscriber}</td>
               <td>{dataByRejected.date_created}</td>
               <td>{dataByRejected.dateofbirth}</td>
               <td>{dataByRejected.fullname}</td>
@@ -104,7 +103,7 @@ const UsersReject = () => {
               <td>{dataByRejected.id_type}</td>
               <td>{dataByRejected.nationality}</td>
               <td>{dataByRejected.permanent_residential_address}</td>
-              <td>{dataByRejected.confirm}</td>
+              <td>{dataByRejected.confirm_status}</td>
             </tr>
           ))}
         </tbody>

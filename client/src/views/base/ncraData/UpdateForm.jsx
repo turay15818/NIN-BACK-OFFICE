@@ -43,8 +43,8 @@ const UpdateForm = () => {
    
    
 
-    const [confirm, setConfirm] = useState('');
-    var [confirmName, setConfirmName] = useState(`${user&&user.userName}`);
+    const [confirm_status, setConfirm_status] = useState('');
+    var [confirmBy_kyc, setConfirmBy_status] = useState(`${user&&user.userName}`);
    var [confirmDate, setConfirmDate] = useState(`${today}`);
    var [revisedReason, setRevisedReason] = useState("");
     const [msg, setMsg] = useState("");
@@ -57,8 +57,8 @@ const UpdateForm = () => {
               `http://localhost:4366/ncra_nin_data/${id}`
             );
             
-            setConfirm(response.data.confirm);
-            setConfirmName(response.data.confirmName);
+            setConfirm_status(response.data.confirm_status);
+            setConfirmBy_status(response.data.confirmBy_kyc);
             setConfirmDate(response.data.confirmDate);
             setRevisedReason(response.data.revisedReason)
        
@@ -79,8 +79,8 @@ const UpdateForm = () => {
         e.preventDefault();
         try {
           await axios.patch(`http://localhost:4366/ncra_nin_data/${id}`, {
-            confirm: confirm,
-            confirmName: confirmName =(`${user&&user.userName}`),
+            confirm_status: confirm_status,
+            confirmBy_kyc: confirmBy_kyc =(`${user&&user.userName}`),
             confirmDate: confirmDate =(`${today}`),
             revisedReason:revisedReason
           });
@@ -117,7 +117,7 @@ const UpdateForm = () => {
                     <CFormInput
                       type="hidden"
                       value={user&&user.userName}
-                      onChange={(e)=> setConfirmName(e.target.value)}
+                      onChange={(e)=> setConfirmBy_status(e.target.value)}
                       placeholder="Your Name"
                       autoComplete="text"
                    
@@ -125,8 +125,8 @@ const UpdateForm = () => {
                     <CInputGroup className="mb-3">
                     <CFormSelect 
                         aria-label="Default select example"
-                        value={confirm}
-                        onChange={(e) => setConfirm(e.target.value)}
+                        value={confirm_status}
+                        onChange={(e) => setConfirm_status(e.target.value)}
                          >
                           <option>select menu</option>
                           <option value="confirmed">ApprovedBy</option>

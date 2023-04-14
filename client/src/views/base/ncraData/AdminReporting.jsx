@@ -145,31 +145,8 @@ const AdminReporting = () => {
                                              onChange={(moment) => setEndDate(moment)}
                                              placeholder="end date"
                                             />
-                                     {/* <CFormInput
-                                        value={startDate}
-                                        onChange={(e) => setStartDate(e.target.value)}
-                                        placeholder="start date and time"
-                                        required
-                                        type="text"
-                                        className="input"
-                                        id="startdate"
-                                        label="start date"
-                                        aria-describedby="exampleFormControlInputHelpInline"
-                                    />
-
-                                    <CFormInput
-                                        className="input"
-                                        value={endDate}
-                                        onChange={(e) => setEndDate(e.target.value)}
-                                        placeholder="end date and time"
-                                        type="text"
-                                        id="enddate"
-                                        label="end date"
-                                        aria-describedby="exampleFormControlInputHelpInline"
-                                    />
-                                      */}
                                          
-                                      <CRow>
+                                         <CRow>
                                           <CCol xs={8}>
                                               <hr />
 
@@ -222,7 +199,7 @@ const AdminReporting = () => {
                                       {ninSearch.map((ninSearch, index) => (
                                           <tr key={ninSearch.id}>
                                               <td>{index + 1}</td>
-                                              <td>{ninSearch.confirmnininfo_by_customer}</td>
+                                              <td>{ninSearch.confirm_by_subscriber}</td>
                                               <td>{ninSearch.date_created}</td>
                                               <td>{ninSearch.dateofbirth}</td>
                                               <td>{ninSearch.fullname}</td>
@@ -231,8 +208,8 @@ const AdminReporting = () => {
                                               <td>{ninSearch.id_type}</td>
                                               <td>{ninSearch.nationality}</td>
                                               <td>{ninSearch.permanent_residential_address}</td>
-                                              <td>{ninSearch.confirm}</td>
-                                              <td>{ninSearch.confirmName}</td>
+                                              <td>{ninSearch.confirm_status}</td>
+                                              <td>{ninSearch.confirmBy_kyc}</td>
                                               <td>{ninSearch.confirmDate}</td>
 
                                           </tr>

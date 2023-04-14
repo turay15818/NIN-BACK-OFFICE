@@ -26,15 +26,15 @@ const UsersDashboard = () => {
   const { user } = useSelector((state) => state.auth);
 
   //NCRA NIN
-  const [nin, setNin] = useState([]);
+  const [ncraNinData, setNcraNinData] = useState([]);
 
   useEffect(() => {
-    getNin();
+    getNcraNinData();
   }, []);
 
-  const getNin = async () => {
-    const response = await axios.get("http://localhost:4366/nin");
-    setNin(response.data);
+  const getNcraNinData = async () => {
+    const response = await axios.get("http://localhost:4366/ncraNinData");
+    setNcraNinData(response.data);
     console.log(response)
   };
 
@@ -66,7 +66,7 @@ const UsersDashboard = () => {
   };
 
   const progressGroupExample2 = [
-    { title: 'NCRA NIN DATA', icon: cilUserFemale, value:nin.length/100 },
+    { title: 'NCRA NIN DATA', icon: cilUserFemale, value:ncraNinData.length/100 },
     { title: 'NCRA NIN CONFIRM', icon: cilUserFemale, value: dataByConfirmed.length/100 },
     { title: 'NCRA NIN REJECT', icon: cilUserFemale, value: dataByRejected.length/100 },
   ]

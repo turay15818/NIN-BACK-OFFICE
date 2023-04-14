@@ -42,8 +42,8 @@ const EditNcraConfirm = () => {
    
    
 
-    const [confirm, setConfirm] = useState('');
-    var [confirmName, setConfirmName] = useState(`${user&user.userName}`);
+    const [confirm_status, setConfirm_status] = useState('');
+    var [confirmBy_kyc, setConfirmBy_kyc] = useState(`${user&user.userName}`);
    var [confirmDate, setConfirmDate] = useState(`${today}`);
     const [msg, setMsg] = useState("");
     const { id } = useParams();
@@ -52,11 +52,11 @@ const EditNcraConfirm = () => {
         const getNinById = async () => {
           try {
             const response = await axios.get(
-              `http://localhost:4366/nin/${id}`
+              `http://localhost:4366/ncra_nin_data/${id}`
             );
             
-            setConfirm(response.data.confirm);
-            setConfirmName(response.data.confirmName);
+            setConfirm_status(response.data.confirm_status);
+            setConfirmBy_kyc(response.data.confirmBy_kyc);
             setConfirmDate(response.data.confirmDate);
        
     
@@ -73,9 +73,9 @@ const EditNcraConfirm = () => {
       const updateRequest = async (e) => {
         e.preventDefault();
         try {
-          await axios.patch(`http://localhost:4366/nin/${id}`, {
-            confirm: confirm,
-            confirmName: confirmName,
+          await axios.patch(`http://localhost:4366/ncra_nin_data/${id}`, {
+            confirm_status: confirm_status,
+            confirmBy_kyc: confirmBy_kyc,
             confirmDate: confirmDate,
           });
           const actor = user.userName; 
@@ -110,7 +110,7 @@ const EditNcraConfirm = () => {
                     <CFormInput
                       type="text"
                       value={user&user.userName}
-                      onChange={(e)=> setConfirmName(e.target.value)}
+                      onChange={(e)=> setConfirmBy_kyc(e.target.value)}
                       placeholder="Your Name"
                       autoComplete="text"
                    
@@ -118,8 +118,8 @@ const EditNcraConfirm = () => {
                     <CInputGroup className="mb-3">
                     <CFormSelect 
                         aria-label="Default select example"
-                        value={confirm}
-                        onChange={(e) => setConfirm(e.target.value)}
+                        value={confirm_status}
+                        onChange={(e) => setConfirm_status(e.target.value)}
                          >
                           <option>select menu</option>
                           <option value="confirmed">Approved</option>

@@ -38,7 +38,7 @@ const ViewDetails = () => {
 
 
 
-    const [confirmnininfo_by_customer, setConfirmation_by_customer] = useState([]);
+    const [confirm_by_subscriber, setConfirm_by_subscriber] = useState([]);
     const [date_created, setDate_created] = useState([]);
     const [dateofbirth, setDateofbirth] = useState([]);
     const [fullname, setFullname] = useState([]);
@@ -47,8 +47,8 @@ const ViewDetails = () => {
     const [id_type, setId_type] = useState([]);
     const [nationality, setNationality] = useState([]);
     const [permanent_residential_address, setPermanent_residential_address] = useState([]);
-    const [confirm, setConfirm] = useState([]);
-    const [confirmName, setConfirmName] = useState([]);
+    const [confirm_status, setConfirm_status] = useState([]);
+    const [confirmBy_kyc, setConfirmBy_kyc] = useState([]);
     const [confirmDate, setConfirmDate] = useState([]);
 
 
@@ -58,8 +58,8 @@ const ViewDetails = () => {
     useEffect(() => {
         const getNinById = async () => {
             try {
-                const response = await axios.get(`http://localhost:4366/nin/${id}`);
-                setConfirmation_by_customer(response.data.confirmnininfo_by_customer);
+                const response = await axios.get(`http://localhost:4366/ncra_nin_data/${id}`);
+                setConfirm_by_subscriber(response.data.confirm_by_subscriber);
                 setDate_created(response.data.date_created);
                 setDateofbirth(response.data.dateofbirth);
                 setFullname(response.data.fullname);
@@ -68,8 +68,8 @@ const ViewDetails = () => {
                 setId_type(response.data.id_type);
                 setNationality(response.data.nationality);
                 setPermanent_residential_address(response.data.permanent_residential_address);
-                setConfirm(response.data.confirm);
-                setConfirmName(response.data.confirmName)
+                setConfirm_status(response.data.confirm_status);
+                setConfirmBy_kyc(response.data.confirmBy_kyc)
                 setConfirmDate(response.data.confirmDate)
                 console.log(response)
             } catch (error) {
@@ -122,7 +122,7 @@ const ViewDetails = () => {
                                     <CListGroup flush>
                                         <CListGroupItem style={{  }}>
                                             <div>
-                                               <h4  style={{marginTop:'30px'}}><span style={cent}>Confirmnininfo_by_customer:</span><span style={det}>{" " + " " + confirmnininfo_by_customer}</span> </h4>
+                                               <h4  style={{marginTop:'30px'}}><span style={cent}>Confirmnininfo_by_customer:</span><span style={det}>{" " + " " + confirm_by_subscriber}</span> </h4>
                                             </div>
                                         </CListGroupItem>
 
@@ -182,13 +182,13 @@ const ViewDetails = () => {
                                         
                                         <CListGroupItem>
                                         <div>
-                                           <h4 style={{marginTop:'10px'}}><span style={cent}>ApprovedBy:</span> <span style={det}>{" " + " " + confirm}</span>  </h4>
+                                           <h4 style={{marginTop:'10px'}}><span style={cent}>ApprovedBy:</span> <span style={det}>{" " + " " + confirm_status}</span>  </h4>
                                         </div>
                                         </CListGroupItem>
 
                                         <CListGroupItem>
                                         <div>
-                                           <h4 style={{marginTop:'10px'}}><span style={cent}>ConfirmedBy:</span><span style={det}>{" " + " " + confirmName}</span>  </h4>
+                                           <h4 style={{marginTop:'10px'}}><span style={cent}>ConfirmedBy:</span><span style={det}>{" " + " " + confirmBy_kyc}</span>  </h4>
                                         </div>
                                         </CListGroupItem>
 

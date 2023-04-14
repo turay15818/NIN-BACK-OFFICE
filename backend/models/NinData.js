@@ -13,7 +13,7 @@ const Nin = db.define('ncra_nin_data',  {
             notEmpty:true,
         },
     },
-    confirmnininfo_by_customer:{
+    confirm_by_subscriber:{
         type: DataTypes.STRING,
         allowNull:false,
         validate:{
@@ -83,14 +83,14 @@ const Nin = db.define('ncra_nin_data',  {
             notEmpty:true,
         },
     },
-    confirm:{
+    confirm_status:{
         type: DataTypes.STRING,
         allowNull:true,
         validate:{
             notEmpty:false,
         },
     },
-    confirmName:{
+    confirmBy_kyc:{
         type: DataTypes.STRING,
         allowNull:true,
         validate:{

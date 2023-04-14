@@ -101,7 +101,7 @@ const ViewDataRejectedByAdmin = () => {
           {dataByRejected.map((dataByRejected, index) => (
             <tr key={dataByRejected.id}>
               <td>{index + 1}</td>
-              <td>{dataByRejected.confirmnininfo_by_customer}</td>
+              <td>{dataByRejected.confirm_by_subscriber}</td>
               <td>{dataByRejected.date_created}</td>
               <td>{dataByRejected.dateofbirth}</td>
               <td>{dataByRejected.fullname}</td>
@@ -110,8 +110,8 @@ const ViewDataRejectedByAdmin = () => {
               <td>{dataByRejected.id_type}</td>
               <td>{dataByRejected.nationality}</td>
               <td>{dataByRejected.permanent_residential_address}</td>
-              <td>{dataByRejected.confirm}</td>
-              <td>{dataByRejected.confirmName}</td>
+              <td>{dataByRejected.confirm_status}</td>
+              <td>{dataByRejected.confirmBy_kyc}</td>
               <td>{dataByRejected.confirmDate}</td>
             </tr>
           ))}

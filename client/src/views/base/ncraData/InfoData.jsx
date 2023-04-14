@@ -223,7 +223,7 @@ return (
               <td>{ncraNinData.fullname}</td>
               <td>{ncraNinData.id_number}</td>
               <td>{ncraNinData.nationality}</td>
-              <td>{ncraNinData.confirm}</td>
+              <td>{ncraNinData.confirm_status}</td>
               <td>
               <CButton style={{ marginRight: "4px", backgroundColor:"black", border:"2px solid yellow" }} id="editUsers">
                         <Link id="editUsers" style={{ textDecoration: "none", fontWeight: 700, color: 'white' }}
